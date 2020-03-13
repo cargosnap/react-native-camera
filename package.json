@@ -1,7 +1,7 @@
 {
-  "name": "@jbuijgers/react-native-camera",
+  "name": "@cargosnap/react-native-camera",
   "description": "A Camera component for React Native. Also reads barcodes.",
-  "version": "3.19.1",
+  "version": "3.19.2",
   "author": "Lochlan Wansbrough <lochie@live.com> (http://lwansbrough.com)",
   "collective": {
     "type": "opencollective",
@@ -38,7 +38,7 @@
     "react-native": "^0.59.1",
     "semantic-release": "^15.10.6"
   },
-  "homepage": "https://github.com/react-native-community/react-native-camera",
+  "homepage": "https://github.com/cargosnap/react-native-camera",
   "keywords": [
     "barcode",
     "camera",
@@ -69,7 +69,7 @@
   "pre-commit": "lint:staged",
   "repository": {
     "type": "git",
-    "url": "https://github.com/react-native-community/react-native-camera.git"
+    "url": "https://github.com/cargosnap/react-native-camera.git"
   },
   "scripts": {
     "commit": "git-cz",
@@ -79,7 +79,9 @@
     "prettier": "prettier --write",
     "ci:publish": "semantic-release"
   },
-  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "types": "types/index.d.ts",
   "release": {
     "plugins": [

@@ -1,7 +1,7 @@
 {
   "name": "@cargosnap/react-native-camera",
   "description": "A Camera component for React Native. Also reads barcodes.",
-  "version": "3.19.5",
+  "version": "3.19.6",
   "author": "Lochlan Wansbrough <lochie@live.com> (http://lwansbrough.com)",
   "collective": {
     "type": "opencollective",
@@ -9,7 +9,8 @@
     "logo": "https://opencollective.com/opencollective/logo.txt"
   },
   "dependencies": {
-    "prop-types": "^15.6.2"
+    "prop-types": "^15.6.2",
+    "react-native-camera": "^3.19.1"
   },
   "devDependencies": {
     "@babel/runtime": "^7.3.1",

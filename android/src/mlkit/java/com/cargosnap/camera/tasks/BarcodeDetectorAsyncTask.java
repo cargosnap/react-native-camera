@@ -33,7 +33,7 @@ public class BarcodeDetectorAsyncTask extends android.os.AsyncTask<Void, Void, V
   private ImageDimensions mImageDimensions;
   private int mPaddingLeft;
   private int mPaddingTop;
-  private String TAG = "RNCamera";
+  private String TAG = "CSCamera";
 
   public BarcodeDetectorAsyncTask(
       BarcodeDetectorAsyncTaskDelegate delegate,

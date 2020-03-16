@@ -84,7 +84,7 @@ public class RNFaceDetector {
       try {
         mFaceDetector.close();
       } catch (Exception e) {
-        Log.e("RNCamera", "Attempt to close FaceDetector failed");
+        Log.e("CSCamera", "Attempt to close FaceDetector failed");
       }
       mFaceDetector = null;
     }

@@ -25,7 +25,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class MutableImage {
-    private static final String TAG = "RNCamera";
+    private static final String TAG = "CSCamera";
 
     private final byte[] originalImageData;
     private Bitmap currentRepresentation;

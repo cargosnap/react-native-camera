@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class CameraViewManager extends ViewGroupManager<RNCameraView> {
+public class CameraViewManager extends ViewGroupManager<CSCameraView> {
   public enum Events {
     EVENT_CAMERA_READY("onCameraReady"),
     EVENT_ON_MOUNT_ERROR("onMountError"),
@@ -41,10 +41,10 @@ public class CameraViewManager extends ViewGroupManager<RNCameraView> {
     }
   }
 
-  private static final String REACT_CLASS = "RNCamera";
+  private static final String REACT_CLASS = "CSCamera";
 
   @Override
-  public void onDropViewInstance(RNCameraView view) {
+  public void onDropViewInstance(CSCameraView view) {
     view.onHostDestroy();
     super.onDropViewInstance(view);
   }
@@ -56,8 +56,8 @@ public class CameraViewManager extends ViewGroupManager<RNCameraView> {
   }
 
   @Override
-  protected RNCameraView createViewInstance(ThemedReactContext themedReactContext) {
-    return new RNCameraView(themedReactContext);
+  protected CSCameraView createViewInstance(ThemedReactContext themedReactContext) {
+    return new CSCameraView(themedReactContext);
   }
 
   @Override
@@ -71,42 +71,42 @@ public class CameraViewManager extends ViewGroupManager<RNCameraView> {
   }
 
   @ReactProp(name = "type")
-  public void setType(RNCameraView view, int type) {
+  public void setType(CSCameraView view, int type) {
     view.setFacing(type);
   }
 
   @ReactProp(name = "cameraId")
-  public void setCameraId(RNCameraView view, String id) {
+  public void setCameraId(CSCameraView view, String id) {
     view.setCameraId(id);
   }
 
   @ReactProp(name = "ratio")
-  public void setRatio(RNCameraView view, String ratio) {
+  public void setRatio(CSCameraView view, String ratio) {
     view.setAspectRatio(AspectRatio.parse(ratio));
   }
 
   @ReactProp(name = "flashMode")
-  public void setFlashMode(RNCameraView view, int torchMode) {
+  public void setFlashMode(CSCameraView view, int torchMode) {
     view.setFlash(torchMode);
   }
 
   @ReactProp(name = "exposure")
-  public void setExposureCompensation(RNCameraView view, float exposure){
+  public void setExposureCompensation(CSCameraView view, float exposure){
     view.setExposureCompensation(exposure);
   }
 
   @ReactProp(name = "autoFocus")
-  public void setAutoFocus(RNCameraView view, boolean autoFocus) {
+  public void setAutoFocus(CSCameraView view, boolean autoFocus) {
     view.setAutoFocus(autoFocus);
   }
 
   @ReactProp(name = "focusDepth")
-  public void setFocusDepth(RNCameraView view, float depth) {
+  public void setFocusDepth(CSCameraView view, float depth) {
     view.setFocusDepth(depth);
   }
 
   @ReactProp(name = "autoFocusPointOfInterest")
-  public void setAutoFocusPointOfInterest(RNCameraView view, ReadableMap coordinates) {
+  public void setAutoFocusPointOfInterest(CSCameraView view, ReadableMap coordinates) {
     if(coordinates != null){
       float x = (float) coordinates.getDouble("x");
       float y = (float) coordinates.getDouble("y");
@@ -115,22 +115,22 @@ public class CameraViewManager extends ViewGroupManager<RNCameraView> {
   }
 
   @ReactProp(name = "zoom")
-  public void setZoom(RNCameraView view, float zoom) {
+  public void setZoom(CSCameraView view, float zoom) {
     view.setZoom(zoom);
   }
 
   @ReactProp(name = "whiteBalance")
-  public void setWhiteBalance(RNCameraView view, int whiteBalance) {
+  public void setWhiteBalance(CSCameraView view, int whiteBalance) {
     view.setWhiteBalance(whiteBalance);
   }
 
   @ReactProp(name = "pictureSize")
-  public void setPictureSize(RNCameraView view, String size) {
+  public void setPictureSize(CSCameraView view, String size) {
     view.setPictureSize(size.equals("None") ? null : Size.parse(size));
   }
 
   @ReactProp(name = "barCodeTypes")
-  public void setBarCodeTypes(RNCameraView view, ReadableArray barCodeTypes) {
+  public void setBarCodeTypes(CSCameraView view, ReadableArray barCodeTypes) {
     if (barCodeTypes == null) {
       return;
     }
@@ -142,67 +142,67 @@ public class CameraViewManager extends ViewGroupManager<RNCameraView> {
   }
 
   @ReactProp(name = "barCodeScannerEnabled")
-  public void setBarCodeScanning(RNCameraView view, boolean barCodeScannerEnabled) {
+  public void setBarCodeScanning(CSCameraView view, boolean barCodeScannerEnabled) {
     view.setShouldScanBarCodes(barCodeScannerEnabled);
   }
 
   @ReactProp(name = "useCamera2Api")
-  public void setUseCamera2Api(RNCameraView view, boolean useCamera2Api) {
+  public void setUseCamera2Api(CSCameraView view, boolean useCamera2Api) {
     view.setUsingCamera2Api(useCamera2Api);
   }
 
   @ReactProp(name = "camera1ScanMode")
-  public void setCamera1ScanMode(RNCameraView view, String camera1ScanMode) {
+  public void setCamera1ScanMode(CSCameraView view, String camera1ScanMode) {
     view.setCamera1ScanMode(camera1ScanMode);
   }
 
   @ReactProp(name = "playSoundOnCapture")
-  public void setPlaySoundOnCapture(RNCameraView view, boolean playSoundOnCapture) {
+  public void setPlaySoundOnCapture(CSCameraView view, boolean playSoundOnCapture) {
     view.setPlaySoundOnCapture(playSoundOnCapture);
   }
 
   @ReactProp(name = "faceDetectorEnabled")
-  public void setFaceDetecting(RNCameraView view, boolean faceDetectorEnabled) {
+  public void setFaceDetecting(CSCameraView view, boolean faceDetectorEnabled) {
     view.setShouldDetectFaces(faceDetectorEnabled);
   }
 
   @ReactProp(name = "faceDetectionMode")
-  public void setFaceDetectionMode(RNCameraView view, int mode) {
+  public void setFaceDetectionMode(CSCameraView view, int mode) {
     view.setFaceDetectionMode(mode);
   }
 
   @ReactProp(name = "faceDetectionLandmarks")
-  public void setFaceDetectionLandmarks(RNCameraView view, int landmarks) {
+  public void setFaceDetectionLandmarks(CSCameraView view, int landmarks) {
     view.setFaceDetectionLandmarks(landmarks);
   }
 
   @ReactProp(name = "faceDetectionClassifications")
-  public void setFaceDetectionClassifications(RNCameraView view, int classifications) {
+  public void setFaceDetectionClassifications(CSCameraView view, int classifications) {
     view.setFaceDetectionClassifications(classifications);
   }
 
   @ReactProp(name = "trackingEnabled")
-  public void setTracking(RNCameraView view, boolean trackingEnabled) {
+  public void setTracking(CSCameraView view, boolean trackingEnabled) {
     view.setTracking(trackingEnabled);
   }
 
   @ReactProp(name = "googleVisionBarcodeDetectorEnabled")
-  public void setGoogleVisionBarcodeDetecting(RNCameraView view, boolean googleBarcodeDetectorEnabled) {
+  public void setGoogleVisionBarcodeDetecting(CSCameraView view, boolean googleBarcodeDetectorEnabled) {
     view.setShouldGoogleDetectBarcodes(googleBarcodeDetectorEnabled);
   }
 
   @ReactProp(name = "googleVisionBarcodeType")
-  public void setGoogleVisionBarcodeType(RNCameraView view, int barcodeType) {
+  public void setGoogleVisionBarcodeType(CSCameraView view, int barcodeType) {
     view.setGoogleVisionBarcodeType(barcodeType);
   }
 
   @ReactProp(name = "googleVisionBarcodeMode")
-  public void setGoogleVisionBarcodeMode(RNCameraView view, int barcodeMode) {
+  public void setGoogleVisionBarcodeMode(CSCameraView view, int barcodeMode) {
     view.setGoogleVisionBarcodeMode(barcodeMode);
   }
 
   @ReactProp(name = "textRecognizerEnabled")
-  public void setTextRecognizing(RNCameraView view, boolean textRecognizerEnabled) {
+  public void setTextRecognizing(CSCameraView view, boolean textRecognizerEnabled) {
     view.setShouldRecognizeText(textRecognizerEnabled);
   }
 }

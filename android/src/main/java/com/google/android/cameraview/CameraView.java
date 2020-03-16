@@ -110,7 +110,7 @@ public class CameraView extends FrameLayout {
         super(context, attrs, defStyleAttr);
 
         // bg hanadler for non UI heavy work
-        mBgThread = new HandlerThread("RNCamera-Handler-Thread");
+        mBgThread = new HandlerThread("CSCamera-Handler-Thread");
         mBgThread.start();
         mBgHandler = new Handler(mBgThread.getLooper());
 

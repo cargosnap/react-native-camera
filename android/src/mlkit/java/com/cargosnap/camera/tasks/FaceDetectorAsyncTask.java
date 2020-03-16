@@ -31,7 +31,7 @@ public class FaceDetectorAsyncTask extends android.os.AsyncTask<Void, Void, Void
   private ImageDimensions mImageDimensions;
   private int mPaddingLeft;
   private int mPaddingTop;
-  private String TAG = "RNCamera";
+  private String TAG = "CSCamera";
 
   public FaceDetectorAsyncTask(
       FaceDetectorAsyncTaskDelegate delegate,

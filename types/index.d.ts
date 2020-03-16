@@ -22,7 +22,7 @@ type Orientation = Readonly<{
 }>;
 type OrientationNumber = 1 | 2 | 3 | 4;
 type AutoFocus = Readonly<{ on: any; off: any }>;
-type VideoStabilization = Readonly<{off: any, standard: any, cinematic: any, auto: any}>;
+type VideoStabilization = Readonly<{ off: any; standard: any; cinematic: any; auto: any }>;
 type FlashMode = Readonly<{ on: any; off: any; torch: any; auto: any }>;
 type CameraType = Readonly<{ front: any; back: any }>;
 type WhiteBalance = Readonly<{
@@ -87,16 +87,16 @@ type GoogleVisionBarcodeMode = Readonly<{ NORMAL: any; ALTERNATE: any; INVERTED:
 
 // Android only
 type Camera1ScanModes = Readonly<{
-  'none': any;
-  'eco': any;
-  'fast': any;
-  'boost': any;
+  none: any;
+  eco: any;
+  fast: any;
+  boost: any;
 }>;
 
 // iOS only
 type CameraScanModes = Readonly<{
-  'none': any;
-  'fast': any;
+  none: any;
+  fast: any;
 }>;
 
 // FaCC (Function as Child Components)
@@ -109,13 +109,11 @@ type RecordAudioPermissionStatus = Readonly<
     NOT_AUTHORIZED: 'NOT_AUTHORIZED';
   }>
 >;
-type FaCC = (
-  params: {
-    camera: RNCamera;
-    status: keyof CameraStatus;
-    recordAudioPermissionStatus: keyof RecordAudioPermissionStatus;
-  },
-) => JSX.Element;
+type FaCC = (params: {
+  camera: RNCamera;
+  status: keyof CameraStatus;
+  recordAudioPermissionStatus: keyof RecordAudioPermissionStatus;
+}) => JSX.Element;
 
 export interface Constants {
   CameraStatus: CameraStatus;
@@ -145,7 +143,7 @@ export interface Constants {
   VideoStabilization: VideoStabilization;
 }
 
-export interface RNCameraProps {
+export interface CSCameraProps {
   children?: ReactNode | FaCC;
 
   autoFocus?: keyof AutoFocus;
@@ -153,7 +151,7 @@ export interface RNCameraProps {
   pictureSize?: string;
 
   /* iOS only */
-  onSubjectAreaChanged?: (event: { nativeEvent: { prevPoint: { x: number; y: number; } } }) => void;
+  onSubjectAreaChanged?: (event: { nativeEvent: { prevPoint: { x: number; y: number } } }) => void;
   type?: keyof CameraType;
   flashMode?: keyof FlashMode;
   notAuthorizedView?: JSX.Element;
@@ -172,15 +170,15 @@ export interface RNCameraProps {
   }): void;
   onMountError?(error: { message: string }): void;
 
-  onPictureTaken?(): void,
+  onPictureTaken?(): void;
   onRecordingStart?(event: {
     nativeEvent: {
       uri: string;
       videoOrientation: number;
       deviceOrientation: number;
-    }
-  }): void,
-  onRecordingEnd?(): void,
+    };
+  }): void;
+  onRecordingEnd?(): void;
 
   /** iOS only */
   onAudioInterrupted?(): void;
@@ -208,12 +206,12 @@ export interface RNCameraProps {
      * @description For Android use `{ width: number, height: number, origin: Array<Point<string>> }`
      * @description For iOS use `{ origin: Point<string>, size: Size<string> }`
      */
-    bounds: { width: number, height: number, origin: Array<Point<string>> } | { origin: Point<string>; size: Size<string> };
+    bounds:
+      | { width: number; height: number; origin: Array<Point<string>> }
+      | { origin: Point<string>; size: Size<string> };
   }): void;
 
-  onGoogleVisionBarcodesDetected?(event: {
-    barcodes: Barcode[];
-  }): void;
+  onGoogleVisionBarcodesDetected?(event: { barcodes: Barcode[] }): void;
 
   // -- FACE DETECTION PROPS
 
@@ -278,7 +276,7 @@ export interface Barcode {
   type: BarcodeType;
   format?: string;
   addresses?: {
-    addressesType?: "UNKNOWN" | "Work" | "Home";
+    addressesType?: 'UNKNOWN' | 'Work' | 'Home';
     addressLines?: string[];
   }[];
   emails?: Email[];
@@ -288,9 +286,9 @@ export interface Barcode {
     firstName?: string;
     lastName?: string;
     middleName?: string;
-    prefix?:string;
-    pronounciation?:string;
-    suffix?:string;
+    prefix?: string;
+    pronounciation?: string;
+    suffix?: string;
     formattedName?: string;
   };
   phone?: Phone;
@@ -329,29 +327,29 @@ export interface Barcode {
 }
 
 export type BarcodeType =
-  |"EMAIL"
-  |"PHONE"
-  |"CALENDAR_EVENT"
-  |"DRIVER_LICENSE"
-  |"GEO"
-  |"SMS"
-  |"CONTACT_INFO"
-  |"WIFI"
-  |"TEXT"
-  |"ISBN"
-  |"PRODUCT"
-  |"URL"
+  | 'EMAIL'
+  | 'PHONE'
+  | 'CALENDAR_EVENT'
+  | 'DRIVER_LICENSE'
+  | 'GEO'
+  | 'SMS'
+  | 'CONTACT_INFO'
+  | 'WIFI'
+  | 'TEXT'
+  | 'ISBN'
+  | 'PRODUCT'
+  | 'URL';
 
 export interface Email {
   address?: string;
   body?: string;
   subject?: string;
-  emailType?: "UNKNOWN" | "Work" | "Home";
+  emailType?: 'UNKNOWN' | 'Work' | 'Home';
 }
 
 export interface Phone {
   number?: string;
-  phoneType?: "UNKNOWN" | "Work" | "Home" | "Fax" | "Mobile";
+  phoneType?: 'UNKNOWN' | 'Work' | 'Home' | 'Fax' | 'Mobile';
 }
 
 export interface Face {
@@ -441,7 +439,7 @@ export interface RecordResponse {
   codec: VideoCodec[keyof VideoCodec];
 }
 
-export class RNCamera extends Component<RNCameraProps & ViewProperties> {
+export class CSCamera extends Component<CSCameraProps & ViewProperties> {
   static Constants: Constants;
 
   _cameraRef: null | NativeMethodsMixinStatic;
@@ -477,7 +475,7 @@ export class FaceDetector {
 // -- DEPRECATED CONTENT BELOW
 
 /**
- * @deprecated As of 1.0.0 release, RCTCamera is deprecated. Please use RNCamera for the latest fixes and improvements.
+ * @deprecated As of 1.0.0 release, RCTCamera is deprecated. Please use CSCamera for the latest fixes and improvements.
  */
 export default class RCTCamera extends Component<any> {
   static constants: any;

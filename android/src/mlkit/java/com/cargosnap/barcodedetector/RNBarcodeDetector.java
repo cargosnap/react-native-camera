@@ -52,7 +52,7 @@ public class RNBarcodeDetector {
             try {
                 mBarcodeDetector.close();
             } catch (Exception e) {
-                Log.e("RNCamera", "Attempt to close BarcodeDetector failed");
+                Log.e("CSCamera", "Attempt to close BarcodeDetector failed");
             }
             mBarcodeDetector = null;
         }

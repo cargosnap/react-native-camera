@@ -37,7 +37,7 @@ public class TextRecognizerAsyncTask extends android.os.AsyncTask<Void, Void, Vo
   private ImageDimensions mImageDimensions;
   private int mPaddingLeft;
   private int mPaddingTop;
-  private String TAG = "RNCamera";
+  private String TAG = "CSCamera";
 
   public TextRecognizerAsyncTask(
       TextRecognizerAsyncTaskDelegate delegate,

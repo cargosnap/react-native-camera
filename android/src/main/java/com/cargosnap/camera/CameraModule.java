@@ -77,7 +77,7 @@ public class CameraModule extends ReactContextBaseJavaModule {
 
   @Override
   public String getName() {
-    return "RNCameraModule";
+    return "CSCameraModule";
   }
 
   @Nullable
@@ -219,10 +219,10 @@ public class CameraModule extends ReactContextBaseJavaModule {
         uiManager.addUIBlock(new UIBlock() {
             @Override
             public void execute(NativeViewHierarchyManager nativeViewHierarchyManager) {
-                final RNCameraView cameraView;
+                final CSCameraView cameraView;
 
                 try {
-                    cameraView = (RNCameraView) nativeViewHierarchyManager.resolveView(viewTag);
+                    cameraView = (CSCameraView) nativeViewHierarchyManager.resolveView(viewTag);
                     if (cameraView.isCameraOpened()) {
                         cameraView.pausePreview();
                     }
@@ -240,10 +240,10 @@ public class CameraModule extends ReactContextBaseJavaModule {
         uiManager.addUIBlock(new UIBlock() {
             @Override
             public void execute(NativeViewHierarchyManager nativeViewHierarchyManager) {
-                final RNCameraView cameraView;
+                final CSCameraView cameraView;
 
                 try {
-                    cameraView = (RNCameraView) nativeViewHierarchyManager.resolveView(viewTag);
+                    cameraView = (CSCameraView) nativeViewHierarchyManager.resolveView(viewTag);
                     if (cameraView.isCameraOpened()) {
                         cameraView.resumePreview();
                     }
@@ -262,7 +262,7 @@ public class CameraModule extends ReactContextBaseJavaModule {
     uiManager.addUIBlock(new UIBlock() {
       @Override
       public void execute(NativeViewHierarchyManager nativeViewHierarchyManager) {
-          RNCameraView cameraView = (RNCameraView) nativeViewHierarchyManager.resolveView(viewTag);
+          CSCameraView cameraView = (CSCameraView) nativeViewHierarchyManager.resolveView(viewTag);
           try {
               if (cameraView.isCameraOpened()) {
                 cameraView.takePicture(options, promise, cacheDirectory);
@@ -286,10 +286,10 @@ public class CameraModule extends ReactContextBaseJavaModule {
       uiManager.addUIBlock(new UIBlock() {
           @Override
           public void execute(NativeViewHierarchyManager nativeViewHierarchyManager) {
-              final RNCameraView cameraView;
+              final CSCameraView cameraView;
 
               try {
-                  cameraView = (RNCameraView) nativeViewHierarchyManager.resolveView(viewTag);
+                  cameraView = (CSCameraView) nativeViewHierarchyManager.resolveView(viewTag);
                   if (cameraView.isCameraOpened()) {
                       cameraView.record(options, promise, cacheDirectory);
                   } else {
@@ -309,10 +309,10 @@ public class CameraModule extends ReactContextBaseJavaModule {
       uiManager.addUIBlock(new UIBlock() {
           @Override
           public void execute(NativeViewHierarchyManager nativeViewHierarchyManager) {
-              final RNCameraView cameraView;
+              final CSCameraView cameraView;
 
               try {
-                  cameraView = (RNCameraView) nativeViewHierarchyManager.resolveView(viewTag);
+                  cameraView = (CSCameraView) nativeViewHierarchyManager.resolveView(viewTag);
                   if (cameraView.isCameraOpened()) {
                       cameraView.stopRecording();
                   }
@@ -330,9 +330,9 @@ public class CameraModule extends ReactContextBaseJavaModule {
       uiManager.addUIBlock(new UIBlock() {
           @Override
           public void execute(NativeViewHierarchyManager nativeViewHierarchyManager) {
-              final RNCameraView cameraView;
+              final CSCameraView cameraView;
               try {
-                  cameraView = (RNCameraView) nativeViewHierarchyManager.resolveView(viewTag);
+                  cameraView = (CSCameraView) nativeViewHierarchyManager.resolveView(viewTag);
                   WritableArray result = Arguments.createArray();
                   if (cameraView.isCameraOpened()) {
                       Set<AspectRatio> ratios = cameraView.getSupportedAspectRatios();
@@ -357,9 +357,9 @@ public class CameraModule extends ReactContextBaseJavaModule {
       uiManager.addUIBlock(new UIBlock() {
           @Override
           public void execute(NativeViewHierarchyManager nativeViewHierarchyManager) {
-              final RNCameraView cameraView;
+              final CSCameraView cameraView;
               try {
-                  cameraView = (RNCameraView) nativeViewHierarchyManager.resolveView(viewTag);
+                  cameraView = (CSCameraView) nativeViewHierarchyManager.resolveView(viewTag);
                   WritableArray result = Arguments.createArray();
                   List<Properties> ids = cameraView.getCameraIds();
                   for (Properties p : ids) {
@@ -384,10 +384,10 @@ public class CameraModule extends ReactContextBaseJavaModule {
       uiManager.addUIBlock(new UIBlock() {
           @Override
           public void execute(NativeViewHierarchyManager nativeViewHierarchyManager) {
-              final RNCameraView cameraView;
+              final CSCameraView cameraView;
 
               try {
-                  cameraView = (RNCameraView) nativeViewHierarchyManager.resolveView(viewTag);
+                  cameraView = (CSCameraView) nativeViewHierarchyManager.resolveView(viewTag);
                   WritableArray result = Arguments.createArray();
                   if (cameraView.isCameraOpened()) {
                       SortedSet<Size> sizes = cameraView.getAvailablePictureSizes(AspectRatio.parse(ratio));

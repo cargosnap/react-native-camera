@@ -53,3 +53,5 @@ examples/mlkit/ios/mlkit/GoogleService-Info.plist
 .classpath
 .project
 org.eclipse.buildship.core.prefs
+
+.npmrc

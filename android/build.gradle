@@ -28,6 +28,8 @@ android {
   defaultConfig {
     minSdkVersion safeExtGet('minSdkVersion', 17)
     targetSdkVersion safeExtGet('targetSdkVersion', 28)
+
+    missingDimensionStrategy 'react-native-camera', 'general'
   }
 
   flavorDimensions "cs-react-native-camera"
@@ -87,4 +89,6 @@ dependencies {
   implementation "androidx.legacy:legacy-support-v4:1.0.0"
   mlkitImplementation "com.google.firebase:firebase-ml-vision:${safeExtGet('firebase-ml-vision', '19.0.3')}"
   mlkitImplementation "com.google.firebase:firebase-ml-vision-face-model:${safeExtGet('firebase-ml-vision-face-model', '17.0.2')}"
+
+  implementation project(':react-native-camera')
 }

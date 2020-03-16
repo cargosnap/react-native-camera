@@ -22,9 +22,7 @@ public class CSCameraPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactApplicationContext) {
         return Arrays.<NativeModule>asList(
-                new RCTCameraModule(reactApplicationContext),
-                new CameraModule(reactApplicationContext),
-                new FaceDetectorModule(reactApplicationContext)
+            new CameraModule(reactApplicationContext)
         );
     }
 
@@ -36,8 +34,7 @@ public class CSCameraPackage implements ReactPackage {
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactApplicationContext) {
         return Arrays.<ViewManager>asList(
-                new RCTCameraViewManager(),
-                new CameraViewManager()
+            new CameraViewManager()
         );
     }
 }

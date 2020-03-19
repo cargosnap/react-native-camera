@@ -402,7 +402,7 @@ public class CSCameraView extends CameraView
     }
     try {
       if (takePicture) {
-        CSCameraView.super.takePicture(options);
+        super.takePicture(options);
       } else {
         checkScanning();
       }

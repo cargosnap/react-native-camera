@@ -66,6 +66,21 @@ public class ResolveTakenPictureAsyncTask extends AsyncTask<Void, Void, Writable
         }
     }
 
+    private void ensureImageData() throws IOException {
+        boolean shouldLoad = mBitmap != null && mImageData == null;
+
+        if(shouldLoad) {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            mImageData = stream.toByteArray();
+            stream.close();
+        }
+
+        if(mImageData == null) {
+            throw new IOException("Failed to load image data");
+        }
+    }
+
     @Override
     protected WritableMap doInBackground(Void... voids) {
         WritableMap response = Arguments.createMap();
@@ -85,25 +100,24 @@ public class ResolveTakenPictureAsyncTask extends AsyncTask<Void, Void, Writable
             // an orderly manner, so that skipProcessing is the default behaviour if no options are given
             // and this behaves more like the iOS version.
             // We will load all data lazily only when needed.
+            ensureImageData();
 
-            if (mImageData != null) {
-                // this should not incurr in any overhead if not read/used
-                inputStream = new ByteArrayInputStream(mImageData);
-            
+            // this should not incurr in any overhead if not read/used
+            inputStream = new ByteArrayInputStream(mImageData);
+        
 
-                // Rotate the bitmap to the proper orientation if requested
-                if(mOptions.hasKey("fixOrientation") && mOptions.getBoolean("fixOrientation")){
+            // Rotate the bitmap to the proper orientation if requested
+            if(mOptions.hasKey("fixOrientation") && mOptions.getBoolean("fixOrientation")) {
 
-                    exifInterface = new ExifInterface(inputStream);
+                exifInterface = new ExifInterface(inputStream);
 
-                    // Get orientation of the image from mImageData via inputStream
-                    int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
+                // Get orientation of the image from mImageData via inputStream
+                int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
 
-                    if(orientation != ExifInterface.ORIENTATION_UNDEFINED){
-                        loadBitmap();
-                        mBitmap = rotateBitmap(mBitmap, getImageRotation(orientation));
-                        orientationChanged = true;
-                    }
+                if(orientation != ExifInterface.ORIENTATION_UNDEFINED){
+                    loadBitmap();
+                    mBitmap = rotateBitmap(mBitmap, getImageRotation(orientation));
+                    orientationChanged = true;
                 }
             }
 
@@ -137,38 +151,36 @@ public class ResolveTakenPictureAsyncTask extends AsyncTask<Void, Void, Writable
                 }
             }
 
-            if (inputStream != null) {
-                // Read Exif data if needed
-                if (writeExifToResponse || writeExifToFile) {
+            // Read Exif data if needed
+            if (writeExifToResponse || writeExifToFile) {
 
-                    // if we manipulated the image, or need to add extra data, or need to add it to the response,
-                    // then we need to load the actual exif data.
-                    // Otherwise we can just use w/e exif data we have right now in our byte array
-                    if(mBitmap != null || exifExtraData != null || writeExifToResponse){
-                        if(exifInterface == null){
-                            exifInterface = new ExifInterface(inputStream);
-                        }
-                        exifData = CSCameraViewHelper.getExifData(exifInterface);
-
-                        if(exifExtraData != null){
-                            exifData.merge(exifExtraData);
-                        }
+                // if we manipulated the image, or need to add extra data, or need to add it to the response,
+                // then we need to load the actual exif data.
+                // Otherwise we can just use w/e exif data we have right now in our byte array
+                if(mBitmap != null || exifExtraData != null || writeExifToResponse){
+                    if(exifInterface == null){
+                        exifInterface = new ExifInterface(inputStream);
                     }
+                    exifData = CSCameraViewHelper.getExifData(exifInterface);
 
-                    // if we did anything to the bitmap, adjust exif
-                    if(mBitmap != null){
-                        exifData.putInt("width", mBitmap.getWidth());
-                        exifData.putInt("height", mBitmap.getHeight());
-
-                        if(orientationChanged){
-                            exifData.putInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-                        }
+                    if(exifExtraData != null){
+                        exifData.merge(exifExtraData);
                     }
+                }
 
-                    // Write Exif data to the response if requested
-                    if (writeExifToResponse) {
-                        response.putMap("exif", exifData);
+                // if we did anything to the bitmap, adjust exif
+                if(mBitmap != null){
+                    exifData.putInt("width", mBitmap.getWidth());
+                    exifData.putInt("height", mBitmap.getHeight());
+
+                    if(orientationChanged){
+                        exifData.putInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
                     }
+                }
+
+                // Write Exif data to the response if requested
+                if (writeExifToResponse) {
+                    response.putMap("exif", exifData);
                 }
             }
 

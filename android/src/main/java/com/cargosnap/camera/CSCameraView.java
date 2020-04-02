@@ -253,7 +253,7 @@ public class CSCameraView extends CameraView
                 if (mLastRotation != correctRotation) {
                   mLastRotation = correctRotation;
                   mRotationMatrix = new Matrix();
-                  mRotationMatrix.postRotate(correctRotation);
+                  mRotationMatrix.postRotate(90);
                 }
                 Bitmap bitmap = mYuvToBitmap.getBimap();
                 rotated = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), mRotationMatrix,
